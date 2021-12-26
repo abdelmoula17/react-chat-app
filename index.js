@@ -6,7 +6,9 @@ const port = process.env.PORT || 5000;
 //const ORIGIN = 'https://61c8cbc195163445ceace5c0--objective-snyder-d581ec.netlify.app';
 const app = express();
 const server = http.createServer(app);
+
 const {addUser,removeUser,getUser,getUsersInRoom,getAllUsers} = require('./users.js');
+app.use(cors());
 const io = socketio(server,{
     cors:{
         origin:'*'
@@ -41,6 +43,6 @@ io.on("connection",(socket)=>{
     })
 });
 app.use(router)
-app.use(cors());
+
 
 server.listen(port, () => console.log(`server running... at port ${port}`));
