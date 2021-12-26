@@ -7,7 +7,11 @@ const port = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
 const {addUser,removeUser,getUser,getUsersInRoom,getAllUsers} = require('./users.js');
-const io = socketio(server);
+const io = socketio(server,{
+    cors:{
+        origin:'*'
+    }
+});
 const router = require('./router');
 io.on("connection",(socket)=>{
     console.log("we have a new connection")
