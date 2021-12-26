@@ -3,16 +3,11 @@ const socketio = require('socket.io');
 const cors = require('cors');
 const http = require('http');
 const port = process.env.PORT || 5000;
-const ORIGIN = 'https://61c8cbc195163445ceace5c0--objective-snyder-d581ec.netlify.app';
+//const ORIGIN = 'https://61c8cbc195163445ceace5c0--objective-snyder-d581ec.netlify.app';
 const app = express();
 const server = http.createServer(app);
 const {addUser,removeUser,getUser,getUsersInRoom,getAllUsers} = require('./users.js');
-const io = socketio(server,{
-    cors:{
-        origin:ORIGIN,
-        method:["GET","POST"]
-    }
-});
+const io = socketio(server);
 const router = require('./router');
 io.on("connection",(socket)=>{
     console.log("we have a new connection")
